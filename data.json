@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "title": "Our Summer Letters",
+    "type": "Book",
+    "genre": "Romance",
+    "author": "Hana Lee",
+    "year": 2021,
+    "rating": 4.6,
+    "isFavorite": true
+  },
+  {
+    "id": 2,
+    "title": "Moonlight Coding Club",
+    "type": "K-Drama",
+    "genre": "Slice of Life",
+    "author": "Park Ji-eun",
+    "year": 2023,
+    "rating": 4.8,
+    "isFavorite": true
+  },
+  {
+    "id": 3,
+    "title": "When Stars Fall Quietly",
+    "type": "Book",
+    "genre": "Drama",
+    "author": "Min Seo",
+    "year": 2020,
+    "rating": 4.4,
+    "isFavorite": false
+  },
+  {
+    "id": 4,
+    "title": "Reply 2016",
+    "type": "K-Drama",
+    "genre": "Nostalgia",
+    "author": "Shin Won-ho",
+    "year": 2016,
+    "rating": 4.9,
+    "isFavorite": true
+  },
+  {
+    "id": 5,
+    "title": "The Library Under Cherry Blossoms",
+    "type": "Book",
+    "genre": "Romance",
+    "author": "Yuna Kim",
+    "year": 2022,
+    "rating": 4.7,
+    "isFavorite": true
+  },
+  {
+    "id": 6,
+    "title": "Midnight Ramyeon",
+    "type": "K-Drama",
+    "genre": "Rom-Com",
+    "author": "Lee Na-jung",
+    "year": 2024,
+    "rating": 4.5,
+    "isFavorite": false
+  },
+  {
+    "id": 7,
+    "title": "Paper Star",
+    "type": "Book",
+    "genre": "Coming of Age",
+    "author": "Ilma Nabila",
+    "year": 2026,
+    "rating": 5,
+    "isFavorite": true
+  },
+  {
+    "id": 8,
+    "title": "The Boy Who Waited at Bus Stop 7",
+    "type": "Book",
+    "genre": "Melodrama",
+    "author": "Jisoo Han",
+    "year": 2019,
+    "rating": 4.3,
+    "isFavorite": false
+  },
+  {
+    "id": 9,
+    "title": "Spring, Again",
+    "type": "K-Drama",
+    "genre": "Healing",
+    "author": "Kim Eun-sook",
+    "year": 2021,
+    "rating": 4.8,
+    "isFavorite": true
+  },
+  {
+    "id": 10,
+    "title": "Notes I Never Sent You",
+    "type": "Book",
+    "genre": "Romance",
+    "author": "Ara Choi",
+    "year": 2023,
+    "rating": 4.6,
+    "isFavorite": true
+  },
+  {
+    "id": 11,
+    "title": "Coffee After Goodbye",
+    "type": "K-Drama",
+    "genre": "Melodrama",
+    "author": "Jung Hae-in",
+    "year": 2024,
+    "rating": 4.7,
+    "isFavorite": false
+  }
+]
