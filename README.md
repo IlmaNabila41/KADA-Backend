@@ -1,55 +1,48 @@
-Product CRUD API
+# 🛍️ Product CRUD API
 
-A simple RESTful API built with Node.js, Express, and MongoDB (Mongoose) that implements full CRUD functionality. This project was created as a backend learning exercise focusing on routing, database integration, and basic error handling.
+A simple RESTful API built with **Node.js, Express, and MongoDB (Mongoose)** that implements full CRUD functionality. This project was created as a backend learning exercise focusing on routing, database integration, and basic error handling.
 
-🚀 Features
+---
 
-Create new products
+## 🚀 Features
 
-Read all products
+* Create new products
+* Read all products
+* Read product by ID
+* Update product
+* Delete product
+* Basic error handling (404 & 500 responses)
 
-Read product by ID
+---
 
-Update product
+## 🧠 API Concept
 
-Delete product
+This API represents a **Product Catalog / Entertainment Media Product**, where each product stores metadata such as title, genre, and rating. It can be used as a base for a watchlist or catalog system.
 
-Basic error handling (404 & 500 responses)
+### Example Fields
 
-🧠 API Concept
+* `title` – Name of the product/media
+* `type` – Media type (e.g., K-Drama, Movie)
+* `genre` – Category
+* `author` – Creator or director
+* `year` – Release year (Number)
+* `rating` – User rating (Number)
+* `isFavorite` – Boolean flag
 
-This API represents a Product Catalog / Entertainment Media Product, where each product stores metadata such as title, genre, and rating. It can be used as a base for a watchlist or catalog system.
+---
 
-Example Fields
+## 🛠 Tech Stack
 
-title – Name of the product/media
+* Node.js (ES Modules)
+* Express.js
+* MongoDB
+* Mongoose
 
-type – Media type (e.g., K-Drama, Movie)
+---
 
-genre – Category
+## 📂 Project Structure
 
-author – Creator or director
-
-year – Release year (Number)
-
-rating – User rating (Number)
-
-isFavorite – Boolean flag
-
-🛠 Tech Stack
-
-Node.js (ES Modules)
-
-Express.js
-
-MongoDB
-
-Mongoose
-
-📂 Project Structure
-
-Based on the current project setup:
-
+```
 KADA-BACKEND
 │
 ├── config/
@@ -65,103 +58,108 @@ KADA-BACKEND
 │   └── model.js             # Product model entry point
 │
 ├── node_modules/
-├── .env                     # Environment variables
+├── .env
 ├── .gitignore
-├── data.json                # Optional seed/dummy data
+├── data.json
 ├── index.js                 # Main server entry
 ├── package.json
 └── package-lock.json
-📡 API Endpoints
+```
 
-Base route depends on how the router is mounted (e.g., /products).
+---
 
-🔹 Get All Products
+## 📡 API Endpoints
 
-GET /products
+> Base route depends on how the router is mounted (e.g., `/products`).
+
+### 🔹 Get All Products
+
+**GET** `/products`
 
 Returns all products from the database.
 
-🔹 Get Product by ID
+---
 
-GET /products/:id
+### 🔹 Get Product by ID
+
+**GET** `/products/:id`
 
 Returns a single product by MongoDB ObjectId.
 
-Responses:
+**Responses:**
 
-200 → Product found
+* `200` → Product found
+* `404` → Data not found
+* `500` → Server error
 
-404 → Data not found
+---
 
-500 → Server error
+### 🔹 Create Product
 
-🔹 Create Product
-
-POST /products
+**POST** `/products`
 
 Create a new product.
 
-Required fields:
+**Required fields:**
 
-title
+* title
+* type
+* genre
+* author
+* year (Number)
+* rating (Number)
 
-type
+---
 
-genre
+### 🔹 Update Product
 
-author
-
-year (Number)
-
-rating (Number)
-
-🔹 Update Product
-
-PUT /products/:id
+**PUT** `/products/:id`
 
 Update an existing product by ID.
+Returns the updated document using `{ new: true }`.
 
-Returns the updated document using { new: true } option.
+---
 
-🔹 Delete Product
+### 🔹 Delete Product
 
-DELETE /products/:id
+**DELETE** `/products/:id`
 
 Deletes a product by ID.
 
-Response:
+**Response**
 
+```json
 {
   "message": "Data deleted successfully"
 }
-⚠️ Error Handling
+```
+
+---
+
+## ⚠️ Error Handling
 
 This API includes basic error handling:
 
-404 Not Found → Returned when data does not exist
+* `404 Not Found` → Returned when data does not exist
+* `500 Internal Server Error` → Returned for unexpected errors
 
-500 Internal Server Error → Returned for unexpected errors
+Some endpoints use async/await with try-catch, while others use promise `.then().catch()` handling.
 
-Some endpoints use async/await with try-catch, while others use promise .then().catch() handling.
+---
 
-
-📌 Learning Goals
+## 📌 Learning Goals
 
 This project was built to practice:
 
-REST API fundamentals
+* REST API fundamentals
+* MongoDB CRUD operations
+* Mongoose modeling
+* Async vs Promise handling
+* Basic backend folder structure
+* Error handling in Express
 
-MongoDB CRUD operations
+---
 
-Mongoose modeling
+## 👩‍💻 Author
 
-Async vs Promise handling
-
-Basic backend folder structure
-
-Error handling in Express
-
-
-👩‍💻 Author
-
-Built as part of a backend learning journey.
+Built as part of a backend learning journey and portfolio development.
