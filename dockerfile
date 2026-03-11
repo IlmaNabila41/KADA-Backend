@@ -12,7 +12,7 @@ RUN npm install
 # Copy semua file project CRUD 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 3001
 
 # Jalankan aplikasi
 CMD ["node", "index.js"]
