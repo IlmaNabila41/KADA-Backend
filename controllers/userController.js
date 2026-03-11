@@ -70,16 +70,18 @@ register: (req, res, next) => {
       </div>
     `;
 
-    User.create({ email, password })
-        .then(user => {
-            // 2. Jalankan fungsi kirim email setelah user berhasil dibuat
-            sendEmail(email, 'Welcome to the Constellation! ✨', htmlTemplate);
+    // User.create({ email, password })
+    //     .then(user => {
+    //         // 2. Jalankan fungsi kirim email setelah user berhasil dibuat
+    //         sendEmail(email, 'Welcome to the Constellation! ✨', htmlTemplate);
             
-            res.status(201).json(user);
-        })
-        .catch(err => {
-            next(err);
-        });
+    //         res.status(201).json(user);
+    //     })
+    //     .catch(err => {
+    //         next(err);
+    //     });
+    console.log("User berhasil register, tapi email dimatikan dulu.");
+        res.status(201).json(user);
 },
 
     // Menangani callback sukses dari Google OAuth
