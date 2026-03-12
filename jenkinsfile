@@ -1,0 +1,62 @@
+pipeline {
+    agent any 
+
+    // environment {
+    //     // Mendefinisikan variabel lingkungan jika diperlukan
+    //     PATH =
+    // }
+
+    stage('Check Environment') {
+    steps {
+        sh 'echo "Lokasi PATH saya adalah: $PATH"'
+        sh 'which docker' // Untuk melihat di folder mana perintah docker berada
+    }
+}
+    stages {
+        stage('Clone Repository') {
+            steps {
+                // Perbaikan sintaks git
+                git url: 'https://github.com/IlmaNabila41/KADA-Backend.git', branch: 'main'
+            }
+        }
+
+        stage('Inject ENV') {
+            steps {
+                withCredentials([file(credentialsId: 'env-file', variable: 'ENV_FILE')]) {
+                    script {
+                        // Salin file credentials ke .env proyek
+                        sh "cp ${ENV_FILE} .env"
+                        sh "chmod 600 .env"
+                    }
+                }
+            }
+        }
+
+        stage('Build Docker') {
+            steps {
+                // Menambahkan tag nama image dan lokasi Dockerfile (.)
+                sh 'docker build -t kada-backend-app .'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Berhentikan dan hapus kontainer lama jika ada agar tidak bentrok
+                    sh 'docker stop kada-backend-container || true'
+                    sh 'docker rm kada-backend-container || true'
+                    
+                    // Jalankan kontainer baru
+                    // -d: detach (background), -p: port mapping, --name: nama kontainer
+                    sh 'docker run -d --name kada-backend-container -p 3000:3000 kada-backend-app'
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            sh 'docker ps -a'
+        }
+    }
+}
