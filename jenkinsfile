@@ -15,8 +15,8 @@ pipeline {
                 withCredentials([file(credentialsId: 'env-file', variable: 'ENV_FILE')]) {
                     script {
                         // Salin file credentials ke .env proyek
-                        bat "cp ${ENV_FILE} .env"
-                        bat "chmod 600 .env"
+                        bat "copy %ENV_FILE% .env"
+                        // bat "chmod 600 .env"
                     }
                 }
             }
