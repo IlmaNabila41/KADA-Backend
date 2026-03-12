@@ -15,8 +15,8 @@ pipeline {
                 withCredentials([file(credentialsId: 'env-file', variable: 'ENV_FILE')]) {
                     script {
                         // Salin file credentials ke .env proyek
-                        sh "cp ${ENV_FILE} .env"
-                        sh "chmod 600 .env"
+                        bat "cp ${ENV_FILE} .env"
+                        bat "chmod 600 .env"
                     }
                 }
             }
@@ -25,7 +25,7 @@ pipeline {
         stage('Build Docker') {
             steps {
                 // Menambahkan tag nama image dan lokasi Dockerfile (.)
-                sh 'docker build -t kada-backend-app .'
+                bat 'docker build -t kada-backend-app .'
             }
         }
 
@@ -33,12 +33,12 @@ pipeline {
             steps {
                 script {
                     // Berhentikan dan hapus kontainer lama jika ada agar tidak bentrok
-                    sh 'docker stop kada-backend-container || true'
-                    sh 'docker rm kada-backend-container || true'
+                    bat 'docker stop kada-backend-container || true'
+                    bat 'docker rm kada-backend-container || true'
                     
                     // Jalankan kontainer baru
                     // -d: detach (background), -p: port mapping, --name: nama kontainer
-                    sh 'docker run -d --name kada-backend-container -p 3000:3000 kada-backend-app'
+                    bat 'docker run -d --name kada-backend-container -p 3000:3000 kada-backend-app'
                 }
             }
         }
@@ -46,7 +46,7 @@ pipeline {
     
     post {
         always {
-            sh 'docker ps -a'
+            bat 'docker ps -a'
         }
     }
 }
