@@ -2,21 +2,19 @@ pipeline {
     agent any 
 
     stages {
-        
         stage('Clone Repository') {
             steps {
-                // Perbaikan sintaks git
                 git url: 'https://github.com/IlmaNabila41/KADA-Backend.git', branch: 'main'
             }
         }
 
         stage('Inject ENV') {
             steps {
+                // Pastikan credentialsId 'env-file' sudah dibuat di Jenkins Dashboard
                 withCredentials([file(credentialsId: 'env-file', variable: 'ENV_FILE')]) {
                     script {
-                        // Salin file credentials ke .env proyek
-                        bat "copy %ENV_FILE% .env"
-                        // bat "chmod 600 .env"
+                        // Gunakan /Y agar otomatis overwrite jika file .env sudah ada
+                        bat "copy /Y %ENV_FILE% .env"
                     }
                 }
             }
@@ -24,7 +22,6 @@ pipeline {
 
         stage('Build Docker') {
             steps {
-                // Menambahkan tag nama image dan lokasi Dockerfile (.)
                 bat 'docker build -t kada-backend-app .'
             }
         }
@@ -32,15 +29,16 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-try {
-                bat "docker stop kada-backend-container"
-                bat "docker rm kada-backend-container"
-            } catch (Exception e) {
-                echo "Container belum ada, lanjut ke tahap run..."
-            }
+                    try {
+                        // Menghentikan dan menghapus container lama jika ada
+                        bat "docker stop kada-backend-container"
+                        bat "docker rm -f kada-backend-container"
+                    } catch (Exception e) {
+                        echo "Container belum ada atau sudah berhenti, langsung deploy baru..."
+                    }
 
-// Jalankan container baru dengan file .env yang sudah di-inject
-                bat "docker run -d -p 8080:8080 --name kada-backend-container --env-file .env kada-backend-app"
+                    // Perhatikan: pastikan port 3000 tidak dipakai aplikasi lain di Windows
+                    bat "docker run -d -p 3000:3000 --name kada-backend-container --env-file .env kada-backend-app"
                 }
             }
         }
@@ -48,6 +46,7 @@ try {
     
     post {
         always {
+            echo "Status container saat ini:"
             bat 'docker ps -a'
         }
     }
