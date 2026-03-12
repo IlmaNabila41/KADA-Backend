@@ -1,18 +1,8 @@
 pipeline {
     agent any 
 
-    // environment {
-    //     // Mendefinisikan variabel lingkungan jika diperlukan
-    //     PATH =
-    // }
-
-    stage('Check Environment') {
-    steps {
-        sh 'echo "Lokasi PATH saya adalah: $PATH"'
-        sh 'which docker' // Untuk melihat di folder mana perintah docker berada
-    }
-}
     stages {
+        
         stage('Clone Repository') {
             steps {
                 // Perbaikan sintaks git
