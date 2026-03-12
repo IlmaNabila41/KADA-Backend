@@ -32,13 +32,15 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Berhentikan dan hapus kontainer lama jika ada agar tidak bentrok
-                    bat 'docker stop kada-backend-container || true'
-                    bat 'docker rm kada-backend-container || true'
-                    
-                    // Jalankan kontainer baru
-                    // -d: detach (background), -p: port mapping, --name: nama kontainer
-                    bat 'docker run -d --name kada-backend-container -p 3000:3000 kada-backend-app'
+try {
+                bat "docker stop kada-backend-container"
+                bat "docker rm kada-backend-container"
+            } catch (Exception e) {
+                echo "Container belum ada, lanjut ke tahap run..."
+            }
+
+// Jalankan container baru dengan file .env yang sudah di-inject
+                bat "docker run -d -p 8080:8080 --name kada-backend-container --env-file .env kada-backend-app"
                 }
             }
         }
